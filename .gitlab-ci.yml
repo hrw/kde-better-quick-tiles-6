@@ -16,6 +16,9 @@ build1:
   stage: build
   script:
     - tar -vczf better-quick-tiles.kwinscript contents metadata.desktop
+  artifacts:
+    paths:
+      -  better-quick-tiles.kwinscript
 
 #test1:
 #  stage: test

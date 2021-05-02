@@ -15,6 +15,7 @@ image: busybox:latest
 build1:
   stage: build
   script:
+    - apt-get install zip unzip
     - zip better-quick-tiles.kwinscript contents metadata.desktop
 
 #test1:

@@ -1,0 +1,20 @@
+[Desktop Entry]
+Name=Better Quick Tiles
+Comment=Allows to quickly send windows via shortcuts to different locations on a 3x2 grid. Pressing the same shortcut multiple times can even cycle through modes like 1/2 of screen, 1/3rd of screen or 2/3rd of screen.
+Icon=preferences-system-windows-script-test
+
+Type=Service
+
+X-Plasma-API=javascript
+X-Plasma-MainScript=code/main.js
+
+X-KDE-PluginInfo-Author=Torge Kummerow
+X-KDE-PluginInfo-Email=torge.kummerow@posteo.de
+X-KDE-PluginInfo-Name=better-quick-tiles
+X-KDE-PluginInfo-Version=1.0.1
+
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-ServiceTypes=KWin/Script
+X-KDE-PluginKeyword=better-quick-tiles
+

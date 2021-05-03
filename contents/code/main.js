@@ -106,7 +106,7 @@ var BQT = {
 	 */
 	registerShortcuts : function() {
         print("Registering shortcuts");
-		var shortcutPrefix = "Better Quick Tiles 4";
+		var shortcutPrefix = "Better Quick Tiles";
 
 		registerShortcut(shortcutPrefix + "Up Left", shortcutPrefix + "Up Left", "Meta+Num+7", ShortCutFunctions.upLeft);
 		registerShortcut(shortcutPrefix + "Up Center", shortcutPrefix + "Up Center", "Meta+Num+8", ShortCutFunctions.upCenter);

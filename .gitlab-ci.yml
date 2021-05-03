@@ -15,10 +15,10 @@ image: busybox:latest
 build1:
   stage: build
   script:
-    - tar -vcf better-quick-tiles.kwinscript contents metadata.desktop
+    - tar -vcf better-quick-tiles${CI_COMMIT_TAG}.kwinscript contents metadata.desktop
   artifacts:
     paths:
-      -  better-quick-tiles.kwinscript
+      -  better-quick-tiles${$CI_COMMIT_TAG}.kwinscript
 
 #test1:
 #  stage: test

@@ -18,7 +18,7 @@ var MODES = {
 	UP_CENTER_CENTER 	: 4, 	//x = 33%, 	y = 0, 		w = 33%, 	h=50%
 	UP_CENTER_FULL 		: 5, 	//x = 0, 	y = 0, 		w = 100%, 	h=50%
 
-	UP_RIGHT_ONE_THIRD 	: 6, 	//x = 66%, 	y = 0, 		w = 33%, 	h=50% 
+	UP_RIGHT_ONE_THIRD 	: 6, 	//x = 66%, 	y = 0, 		w = 33%, 	h=50%
 	UP_RIGHT_HALF 		: 7, 	//x = 50%,	y = 0, 		w = 50%, 	h=50%
 	UP_RIGHT_TWO_THIRD 	: 8, 	//x = 33%, 	y = 0, 		w = 66%, 	h=50%
 
@@ -65,7 +65,7 @@ var Grid = {
 
 	halfH 		: null,
 	fullH 		: null,
-	
+
 	/**
 	 * Updates the points and sizes based on the current active screen
 	 *
@@ -73,7 +73,7 @@ var Grid = {
 	 */
 	updateToCurrentScreen : function () {
 		var screenBounds = BQT.getActiveScreenBounds();
-		
+
 		this.oneThirdX 	= screenBounds.width/3;
 		this.halfX 		= screenBounds.width/2;
 		this.twoThirdX 	= screenBounds.width/3*2;
@@ -95,18 +95,19 @@ var Grid = {
  * Main object for Better Quick Tile plugin
  */
 var BQT = {
-	
-	start : function() {
+
+	init : function() {
+        print("Initializing");
 		this.registerShortcuts();
 	},
-	
+
 	/**
 	 * Registers all shortcuts this extension does provide
 	 */
 	registerShortcuts : function() {
-	
-		var shortcutPrefix = "Better Quick Tiles ";
-		
+        print("Registering shortcuts");
+		var shortcutPrefix = "Better Quick Tiles 4";
+
 		registerShortcut(shortcutPrefix + "Up Left", shortcutPrefix + "Up Left", "Meta+Num+7", ShortCutFunctions.upLeft);
 		registerShortcut(shortcutPrefix + "Up Center", shortcutPrefix + "Up Center", "Meta+Num+8", ShortCutFunctions.upCenter);
 		registerShortcut(shortcutPrefix + "Up Right", shortcutPrefix + "Up Right", "Meta+Num+9", ShortCutFunctions.upRight);
@@ -116,6 +117,8 @@ var BQT = {
 		registerShortcut(shortcutPrefix + "Down Left", shortcutPrefix + "Down Left", "Meta+Num+1", ShortCutFunctions.downLeft);
 		registerShortcut(shortcutPrefix + "Down Center", shortcutPrefix + "Down Center", "Meta+Num+2", ShortCutFunctions.downCenter);
 		registerShortcut(shortcutPrefix + "Down Right", shortcutPrefix + "Down Right", "Meta+Num+3", ShortCutFunctions.downRight);
+
+        print("Shortcuts registered")
 	},
 
 	/**
@@ -125,9 +128,9 @@ var BQT = {
 	 */
 	getActiveWindowBounds : function() {
 		var activeWindowBounds = workspace.activeClient.frameGeometry;
-		
+
 		//Substract the relative screen position (Multi screen support)
-	    var screenBounds = this.getScreenBounds();		
+	    var screenBounds = this.getActiveScreenBounds();
 	    activeWindowBounds.x -= screenBounds.x;
 	    activeWindowBounds.y -= screenBounds.y;
 
@@ -136,7 +139,7 @@ var BQT = {
 
 	/**
 	*	Get the bounds of the screen the currently active window is on
-	* 	
+	*
 	* 	@returns: QRect containing x,y, width and height fields
  	*/
 	getActiveScreenBounds : function() {
@@ -144,19 +147,21 @@ var BQT = {
 	},
 
 	/**
-	 *  Get the window position mode, the window is currently in. 
+	 *  Get the window position mode, the window is currently in.
 	 *  If it is in no predefine mode the value modes.FLOATING will be returned
-     *  
+     *
 	 *  @returns: integer One of the values in the variable modes
 	 */
 	getMode : function() {
-        
+        print("getMode called");
 		var windowBounds = this.getActiveWindowBounds();
-	
+
 		//Getting possible modes due to the windows' X position
-		
+
+        print("Determining current mode");
+
 		var possibleModesX = [];
-		
+
 		if (windowBounds.x == 0) {
 			possibleModesX.push(MODES.UP_LEFT_HALF);
 			possibleModesX.push(MODES.UP_LEFT_ONE_THIRD);
@@ -195,12 +200,13 @@ var BQT = {
 			return MODES.FLOATING;
 		}
 
+		print("Possible modes found for X");
 
 
 		//Getting possible modes due to the windows' Y position'
-		
+
 		var possibleModesY = [];
-		
+
 		if (windowBounds.y == 0) {
 			possibleModesY.push(MODES.UP_LEFT_HALF);
 			possibleModesY.push(MODES.UP_LEFT_ONE_THIRD);
@@ -237,9 +243,9 @@ var BQT = {
 
 
 		//Getting possible modes due to the windows' width
-		
+
 		var possibleModesW = [];
-		
+
 		if (windowBounds.width == Grid.oneThirdW) {
 			possibleModesW.push(MODES.UP_LEFT_ONE_THIRD);
 			possibleModesW.push(MODES.UP_CENTER_CENTER);
@@ -280,7 +286,7 @@ var BQT = {
 
 
 		//Getting possible modes due to the windows' height
-		
+
 		var possibleModesH = [];
 
 		if (windowBounds.height == Grid.halfH) {
@@ -317,7 +323,7 @@ var BQT = {
 			return MODES.FLOATING;
 		}
 
-		
+
 		//Checking if one mode satisfies all 4 parameters. X, Y, Widht and Height
 		for (var ix in possibleModesX) {
 			var mode = possibleModesX[ix];
@@ -335,13 +341,13 @@ var BQT = {
 
 	/**
 	 * Sets the mode for the active window and by that move it to the position for this mode.
-     * 
+     *
      * @param mode: The mode to move the window in
 	 *
-	 * @returns: void 
+	 * @returns: void
 	 */
 	setMode : function(mode) {
-
+        print("Set mode: "+mode);
 		var x,y,w,h;
 
 		//Setting sizes based on the given mode.
@@ -384,14 +390,14 @@ var BQT = {
 		}
 
 		//Calulating the new window frame geometry relative to the active screen
-		var screenBounds = EQT.getActiveScreenBounds();
+		var screenBounds = BQT.getActiveScreenBounds();
 		var newFrameGeometry =  {
             x: x+screenBounds.x,
             y: y+screenBounds.y,
             width: w,
             height: h
         }
-        
+
 		//Setting the new window geomety
 		workspace.activeClient.frameGeometry = newFrameGeometry;
 	},
@@ -402,19 +408,21 @@ var BQT = {
      *
 	 * It will get the current mode. Then see if this is one of the modes in the nextModeMap.
 	 * If that is the case, the mode in the nextModeMap will be appied, if not, the startMode will be applied.
-     * 
+     *
      * @param startMode: The mode the window should be put in, if it is in no valid according to the nextModeMap
 	 * @param nextModeMap: The mapping of which mode leads to which next mode on repeated key press.
      *
 	 * @returns void
 	 */
 	updateWindowPosition : function(startMode, nextModeMap) {
-			
+        print("Update window position: "+startMode);
 		//Update the grid parameters to the currently active screen (Multi monitor support)
 		Grid.updateToCurrentScreen();
-		
+
 		//Get the current mode associated with the size and position of the window.
 		var currentMode = this.getMode();
+
+        print("Current mode: "+currentMode);
 
 		//See if there is a valid followup mode available for the current mode (Repeated key presses)
 		var nextMode = nextModeMap[currentMode];
@@ -423,9 +431,9 @@ var BQT = {
 			//No valid followup. Applying start mode
 			nextMode = startMode;
 		}
-		
+
 		//Moving window to new designated position and size
-		EQT.setMode(nextMode);
+		BQT.setMode(nextMode);
 	}
 };
 
@@ -435,6 +443,7 @@ var BQT = {
  */
 var ShortCutFunctions =  {
 	upLeft : function() {
+        print("Up left pressed");
 		//If the window is not in any valid up left position yet,
 		//this is the first position the window will be put in
 		var startMode = MODES.UP_LEFT_HALF;
@@ -536,4 +545,4 @@ var ShortCutFunctions =  {
 };
 
 //Starting script
-BQT.start();
+BQT.init();

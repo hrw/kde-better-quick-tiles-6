@@ -18,7 +18,7 @@ build1:
     - tar -vcf better-quick-tiles.kwinscript contents metadata.desktop
   artifacts:
     paths:
-      -  better-quick-tiles$.kwinscript
+      -  better-quick-tiles.kwinscript
 
 #test1:
 #  stage: test

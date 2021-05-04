@@ -73,20 +73,33 @@ var Grid = {
 	 */
 	updateToCurrentScreen : function () {
 		var screenBounds = BQT.getActiveScreenBounds();
+		
+		print("Screen bounds: "+screenBounds.x+"/"+screenBounds.y+"/"+screenBounds.width+"/"+screenBounds.height);
 
-		this.oneThirdX 	= screenBounds.width/3;
-		this.halfX 		= screenBounds.width/2;
-		this.twoThirdX 	= screenBounds.width/3*2;
+		this.oneThirdX 	= Math.floor(screenBounds.width/3);
+		this.halfX 		= Math.floor(screenBounds.width/2);
+		this.twoThirdX 	= Math.floor(screenBounds.width/3*2);
 
-		this.halfY 		= screenBounds.height/2;
+		this.halfY 		= Math.floor(screenBounds.height/2);
 
-		this.oneThirdW 	= screenBounds.width/3;
-        this.halfW 		= screenBounds.width/2;
-		this.twoThirdW 	= screenBounds.width/3*2;
+		this.oneThirdW 	= Math.floor(screenBounds.width/3);
+        this.halfW 		= Math.floor(screenBounds.width/2);
+		this.twoThirdW 	= Math.floor(screenBounds.width/3*2);
 		this.fullW 		= screenBounds.width;
 
-		this.halfH 		= screenBounds.height/2;
+		this.halfH 		= Math.floor(screenBounds.height/2);
 		this.fullH 		= screenBounds.height;
+		
+		print("Grid params: ");
+		print("oneThirdX: "+this.oneThirdX);
+		print("halfX: "+this.halfX);
+		print("halfY: "+this.halfY);
+		print("oneThirdW: "+this.oneThirdW);
+		print("halfW: "+this.halfW);
+		print("twoThirdW: "+this.twoThirdW);
+		print("fullW: "+this.fullW);
+		print("halfH: "+this.halfH);
+		print("fullH: "+this.fullH);
 	}
 };
 
@@ -106,7 +119,7 @@ var BQT = {
 	 */
 	registerShortcuts : function() {
         print("Registering shortcuts");
-		var shortcutPrefix = "Better Quick Tiles";
+		var shortcutPrefix = "Better Quick Tiles ";
 
 		registerShortcut(shortcutPrefix + "Up Left", shortcutPrefix + "Up Left", "Meta+Num+7", ShortCutFunctions.upLeft);
 		registerShortcut(shortcutPrefix + "Up Center", shortcutPrefix + "Up Center", "Meta+Num+8", ShortCutFunctions.upCenter);
@@ -155,6 +168,8 @@ var BQT = {
 	getMode : function() {
         print("getMode called");
 		var windowBounds = this.getActiveWindowBounds();
+		
+		print("Window bounds: "+windowBounds.x+"/"+windowBounds.y+"/"+windowBounds.height+"/"+windowBounds.width);
 
 		//Getting possible modes due to the windows' X position
 
@@ -375,19 +390,21 @@ var BQT = {
 			case MODES.RIGHT_HALF 			:	x=Grid.halfX;		y=0;		w=Grid.halfW;		h=Grid.fullH;	break;
 			case MODES.RIGHT_TWO_THIRD 		:	x=Grid.oneThirdX;	y=0;		w=Grid.twoThirdW;	h=Grid.fullH;	break;
 
-			case MODES.DOWN_LEFT_ONE_THIRD	:	x=0;				y=halfY;	w=Grid.oneThirdW;	h=Grid.halfH;	break;
-			case MODES.DOWN_LEFT_HALF 		:	x=0;				y=halfY;	w=Grid.halfW;		h=Grid.halfH;	break;
-			case MODES.DOWN_LEFT_TWO_THIRD 	:	x=0;				y=halfY;	w=Grid.twoThirdW;	h=Grid.halfH;	break;
+			case MODES.DOWN_LEFT_ONE_THIRD	:	x=0;				y=Grid.halfY;	w=Grid.oneThirdW;	h=Grid.halfH;	break;
+			case MODES.DOWN_LEFT_HALF 		:	x=0;				y=Grid.halfY;	w=Grid.halfW;		h=Grid.halfH;	break;
+			case MODES.DOWN_LEFT_TWO_THIRD 	:	x=0;				y=Grid.halfY;	w=Grid.twoThirdW;	h=Grid.halfH;	break;
 
-			case MODES.DOWN_CENTER_CENTER 	:	x=Grid.oneThirdX;	y=halfY;	w=Grid.oneThirdW;	h=Grid.halfH;	break;
-			case MODES.DOWN_CENTER_FULL 	:	x=0;				y=halfY;	w=Grid.fullW;		h=Grid.halfH;	break;
+			case MODES.DOWN_CENTER_CENTER 	:	x=Grid.oneThirdX;	y=Grid.halfY;	w=Grid.oneThirdW;	h=Grid.halfH;	break;
+			case MODES.DOWN_CENTER_FULL 	:	x=0;				y=Grid.halfY;	w=Grid.fullW;		h=Grid.halfH;	break;
 
-			case MODES.DOWN_RIGHT_ONE_THIRD :	x=Grid.twoThirdX;	y=halfY;	w=Grid.oneThirdW;	h=Grid.halfH;	break;
-			case MODES.DOWN_RIGHT_HALF 		:	x=Grid.halfX;		y=halfY;	w=Grid.halfW;		h=Grid.halfH;	break;
-			case MODES.DOWN_RIGHT_TWO_THIRD :	x=Grid.oneThirdX;	y=halfY;	w=Grid.twoThirdW;	h=Grid.halfH;	break;
+			case MODES.DOWN_RIGHT_ONE_THIRD :	x=Grid.twoThirdX;	y=Grid.halfY;	w=Grid.oneThirdW;	h=Grid.halfH;	break;
+			case MODES.DOWN_RIGHT_HALF 		:	x=Grid.halfX;		y=Grid.halfY;	w=Grid.halfW;		h=Grid.halfH;	break;
+			case MODES.DOWN_RIGHT_TWO_THIRD :	x=Grid.oneThirdX;	y=Grid.halfY;	w=Grid.twoThirdW;	h=Grid.halfH;	break;
 
-			default:
+			default:	break;
 		}
+
+		print("New bounds: "+x+"/"+y+"/"+w+"/"+h);
 
 		//Calulating the new window frame geometry relative to the active screen
 		var screenBounds = BQT.getActiveScreenBounds();
@@ -397,6 +414,8 @@ var BQT = {
             width: w,
             height: h
         }
+
+		
 
 		//Setting the new window geomety
 		workspace.activeClient.frameGeometry = newFrameGeometry;

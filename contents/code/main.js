@@ -23,26 +23,26 @@ var MODES = {
 	UP_RIGHT_TWO_THIRD 	: 8, 	//x = 33%, 	y = 0, 		w = 66%, 	h=50%
 
 	RIGHT_ONE_THIRD 	: 9, 	//x = 66%, 	y = 0, 		w = 33%, 	h=100%
-	RIGHT_HALF 			: 10, 	//x = 50%, 	y = 0, 		w = 50%, 	h=100%
+	RIGHT_HALF 		: 10, 	//x = 50%, 	y = 0, 		w = 50%, 	h=100%
 	RIGHT_TWO_THIRD 	: 11, 	//x = 33%, 	y = 0, 		w = 66%, 	h=100%
 
 	CENTER_CENTER 		: 12, 	//x = 33%, 	y = 0, 		w = 33%, 	h=100%
 	CENTER_FULL 		: 13, 	//x = 0, 	y = 0, 		w = 100%, 	h=100%
 
 	LEFT_ONE_THIRD 		: 14, 	//x = 0, 	y = 0, 		w = 33%, 	h=100%
-	LEFT_HALF 			: 15, 	//x = 0, 	y = 0, 		w = 50%, 	h=100%
+	LEFT_HALF 		: 15, 	//x = 0, 	y = 0, 		w = 50%, 	h=100%
 	LEFT_TWO_THIRD 		: 16, 	//x = 0, 	y = 0, 		w = 66%, 	h=100%
 
-	DOWN_LEFT_ONE_THIRD : 17, 	//x = 0, 	y = 50%, 	w = 33%, 	h=50%
+	DOWN_LEFT_ONE_THIRD 	: 17, 	//x = 0, 	y = 50%, 	w = 33%, 	h=50%
 	DOWN_LEFT_HALF 		: 18, 	//x = 0,	y = 50%, 	w = 50%, 	h=50%
-	DOWN_LEFT_TWO_THIRD : 19, 	//x = 0, 	y = 50%, 	w = 66%, 	h=50%
+	DOWN_LEFT_TWO_THIRD 	: 19, 	//x = 0, 	y = 50%, 	w = 66%, 	h=50%
 
 	DOWN_CENTER_CENTER 	: 20, 	//x = 33%, 	y = 50%, 	w = 33%, 	h=50%
 	DOWN_CENTER_FULL 	: 21, 	//x = 0, 	y = 50%, 	w = 100%, 	h=50%
 
-	DOWN_RIGHT_ONE_THIRD : 22, 	//x = 66%, 	y = 50%, 	w = 33%, 	h=50%
-	DOWN_RIGHT_HALF 	 : 23, 	//x = 50%, 	y = 50%, 	w = 50%, 	h=50%
-	DOWN_RIGHT_TWO_THIRD : 24 	//x = 33%, 	y = 50%, 	w = 66%, 	h=50%
+	DOWN_RIGHT_ONE_THIRD 	: 22, 	//x = 66%, 	y = 50%, 	w = 33%, 	h=50%
+	DOWN_RIGHT_HALF 	: 23, 	//x = 50%, 	y = 50%, 	w = 50%, 	h=50%
+	DOWN_RIGHT_TWO_THIRD 	: 24 	//x = 33%, 	y = 50%, 	w = 66%, 	h=50%
 };
 
 
@@ -59,7 +59,7 @@ var Grid = {
 	halfY 		: null,
 
 	oneThirdW 	: null,
-    halfW 		: null,
+	halfW 		: null,
 	twoThirdW 	: null,
 	fullW 		: null,
 

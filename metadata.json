@@ -5,16 +5,20 @@
 			{
 				"Email": "torge.kummerow@posteo.de",
 				"Name": "Torge Kummerow"
+			},
+			{
+				"Email": "marcin-kde@juszkiewicz.com.pl",
+				"Name": "Marcin Juszkiewicz"
 			}
 		],
 		"Description": "Allows to quickly send windows via shortcuts to different locations on a 3x2 grid. Pressing the same shortcut multiple times can even cycle through modes like 1/2 of screen, 1/3rd of screen or 2/3rd of screen.",
 		"Icon": "preferences-system-windows-script-test",
-		"Id": "better-quick-tiles",
-		"License": "GPL",
-		"Name": "Better Quick Tiles",
+		"Id": "better-quick-tiles-for-plasma-6",
+		"License": "GPLv3",
+		"Name": "Better Quick Tiles for Plasma 6",
 		"Version": "2024.1"
 	},
-	"X-KDE-PluginKeyword": "better-quick-tiles",
+	"X-KDE-PluginKeyword": "better-quick-tiles-for-plasma-6",
 	"X-Plasma-API": "javascript",
 	"X-Plasma-MainScript": "code/main.js",
 	"X-Plasma-API-Minimum-Version": "6.0"
